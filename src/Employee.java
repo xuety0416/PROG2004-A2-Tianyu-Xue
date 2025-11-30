@@ -1,18 +1,18 @@
 public class Employee extends Person {
-    private String employeeId; // 员工ID（专属属性）
-    private String position;   // 岗位类型（专属属性：如 Ride Operator）
+    private String employeeId; // Employee ID (exclusive attribute)
+    private String position;   // Position type (exclusive attribute: e.g., Ride Operator)
 
-    // 默认构造器
+    // Default constructor
     public Employee() {}
 
-    // 带参构造器（初始化父类+自身属性）
+    // Parameterized constructor (initialize parent class + own attributes)
     public Employee(String name, int age, String idNumber, String employeeId, String position) {
         super(name, age, idNumber);
         this.employeeId = employeeId;
         this.position = position;
     }
 
-    // getter/setter 方法
+    // getter/setter methods
     public String getEmployeeId() {
         return employeeId;
     }
@@ -29,10 +29,9 @@ public class Employee extends Person {
         this.position = position;
     }
 
-    // 重写 toString()，**主动调用getter方法**（消除“方法未使用”提示）
     @Override
     public String toString() {
-        // 用getter代替直接访问属性
-        return "Employee{ID=" + getEmployeeId() + ", 姓名=" + getName() + ", 岗位=" + getPosition() + "}";
+        // Use getter instead of direct attribute access
+        return "Employee{ID=" + getEmployeeId() + ", Name=" + getName() + ", Position=" + getPosition() + "}";
     }
 }

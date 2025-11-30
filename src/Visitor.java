@@ -1,6 +1,6 @@
 public class Visitor extends Person {
-    private String visitorId;       // 访客编号（专属属性）
-    private String membershipLevel; // 会员等级（专属属性：Standard/Gold/Platinum）
+    private String visitorId;       // Visitor ID (exclusive attribute)
+    private String membershipLevel; // Membership level (exclusive attribute: Standard/Gold/Platinum)
 
     public Visitor() {}
 
@@ -9,16 +9,16 @@ public class Visitor extends Person {
         this.visitorId = visitorId;
         this.membershipLevel = membershipLevel;
 
-        // 校验必填字段（作业隐含：身份证号和访客ID为唯一标识，不能为空）
+        // Validate required fields (ID Number and Visitor ID are unique identifiers, cannot be empty)
         if (idNumber == null || idNumber.trim().isEmpty()) {
-            throw new IllegalArgumentException("访客身份证号不能为空");
+            throw new IllegalArgumentException("Visitor ID Number cannot be empty");
         }
         if (visitorId == null || visitorId.trim().isEmpty()) {
-            throw new IllegalArgumentException("访客ID不能为空");
+            throw new IllegalArgumentException("Visitor ID cannot be empty");
         }
     }
 
-    // getter/setter 方法
+    // getter/setter methods
     public String getVisitorId() {
         return visitorId;
     }
@@ -35,9 +35,9 @@ public class Visitor extends Person {
         this.membershipLevel = membershipLevel;
     }
 
-    // 重写 toString()，方便打印
+    // Override toString() for easy printing
     @Override
     public String toString() {
-        return "Visitor{ID=" + visitorId + ", 姓名=" + getName() + ", 年龄=" + getAge() + ", 会员等级=" + membershipLevel + "}";
+        return "Visitor{ID=" + visitorId + ", Name=" + getName() + ", Age=" + getAge() + ", Membership Level=" + membershipLevel + "}";
     }
 }

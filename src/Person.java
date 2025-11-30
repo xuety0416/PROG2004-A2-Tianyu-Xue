@@ -1,19 +1,19 @@
 public abstract class Person {
-    private String name;       // 姓名（父类属性）
-    private int age;           // 年龄（父类属性）
-    private String idNumber;   // 身份证号（父类属性）
+    private String name;       // Name (parent class attribute)
+    private int age;           // Age (parent class attribute)
+    private String idNumber;   // ID Number (parent class attribute, e.g., ID Card Number)
 
-    // 默认构造器
+    // Default constructor
     public Person() {}
 
-    // 带参构造器
+    // Parameterized constructor
     public Person(String name, int age, String idNumber) {
         this.name = name;
         this.age = age;
         this.idNumber = idNumber;
     }
 
-    // getter/setter 方法
+    // getter/setter methods
     public String getName() {
         return name;
     }
