@@ -1,35 +1,43 @@
-import java.io.BufferedWriter;
-import java.io.FileWriter;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * Ride class implements RideInterface, contains waiting queue, ride history, cycle, and export functions.
- * Added Part6: CSV export for ride history
+ * Ride class implements RideInterface, contains queue, history, cycle, export and import functions.
+ * Added Part7: CSV import for ride history
  */
 public class Ride implements RideInterface {
-    // 原有属性、构造器、Getter/Setter、队列/历史/周期方法（无变动）
+    // 原有属性、构造器、Getter/Setter、所有已实现方法（无变动）
 
-    // Part6核心方法：导出骑行历史到CSV文件（含异常处理）
-    public void exportRideHistory(String filePath) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-            // 写入CSV表头
-            writer.write("VisitorID,Name,Age,ContactNumber");
-            writer.newLine();
+    // Part7核心方法：从CSV文件导入骑行历史（含异常处理）
+    public void importRideHistory(String filePath) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            reader.readLine(); // 跳过CSV表头
 
-            // 写入历史数据
-            for (Visitor v : rideHistory) {
-                writer.write(String.format("%s,%s,%d,%s",
-                        v.getVisitorId(),
-                        v.getName(),
-                        v.getAge(),
-                        v.getContactNumber()));
-                writer.newLine();
+            // 读取每行数据并创建Visitor对象
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length == 4) {
+                    String visitorId = parts[0];
+                    String name = parts[1];
+                    int age = Integer.parseInt(parts[2]);
+                    String contactNumber = parts[3];
+
+                    Visitor visitor = new Visitor(name, age, visitorId, contactNumber);
+                    addVisitorToHistory(visitor); // 添加到骑行历史
+                }
             }
-            System.out.println("Successfully exported ride history to: " + filePath);
+            System.out.println("Successfully imported ride history from: " + filePath);
+        } catch (FileNotFoundException e) {
+            System.err.println("Error importing: File not found - " + e.getMessage());
         } catch (IOException e) {
-            System.err.println("Error exporting ride history: " + e.getMessage());
+            System.err.println("Error reading file: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.err.println("Error parsing age: " + e.getMessage());
         }
     }
 }
