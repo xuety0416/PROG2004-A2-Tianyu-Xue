@@ -1,20 +1,17 @@
 public class AssignmentTwo {
     public static void main(String[] args) {
-        System.out.println("PROG2004 A2 Assignment - Part3: Waiting Queue");
+        System.out.println("PROG2004 A2 Assignment - Part4A: Ride History Storage");
 
-        // 创建Ride和游客
         RideInterface rollerCoaster = new Ride("Roller Coaster", 12, 60);
         Visitor v1 = new Visitor("Alice", 15, "V001", "123456");
-        Visitor v2 = new Visitor("Bob", 10, "V002", "789012"); // 年龄不达标
         Visitor v3 = new Visitor("Charlie", 20, "V003", "345678");
 
-        // 演示队列操作
-        rollerCoaster.addVisitorToQueue(v1);
-        rollerCoaster.addVisitorToQueue(v2);
-        rollerCoaster.addVisitorToQueue(v3);
-        rollerCoaster.printQueue();
+        // 演示历史存储
+        rollerCoaster.addVisitorToHistory(v1);
+        rollerCoaster.addVisitorToHistory(v3);
+        rollerCoaster.printRideHistory();
 
-        rollerCoaster.removeVisitorFromQueue(v1);
-        rollerCoaster.printQueue();
+        System.out.println("\nIs Alice in history? " + rollerCoaster.checkVisitorFromHistory(v1));
+        System.out.println("Total visitors in history: " + rollerCoaster.countVisitorsInHistory());
     }
 }
