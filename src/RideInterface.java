@@ -1,12 +1,15 @@
 public interface RideInterface {
-    // 等待队列相关方法（Part3预留）
+    // Queue management methods
     void addVisitorToQueue(Visitor visitor);
-    void removeVisitorFromQueue(Visitor visitor);
+    void removeVisitorFromQueue();
     void printQueue();
 
-    // 骑行历史相关方法（Part4预留）
+    // Ride history methods
     void addVisitorToHistory(Visitor visitor);
     boolean checkVisitorFromHistory(Visitor visitor);
-    int countVisitorsInHistory();
+    int numberOfVisitors();
     void printRideHistory();
+
+    // Ride operation method
+    void runOneCycle();
 }
